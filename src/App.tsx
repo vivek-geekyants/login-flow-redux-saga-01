@@ -1,24 +1,62 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Login from "./routes/Login";
+import Signup from "./routes/Signup";
+import Homepage from "./routes/Homepage";
+import ProtectedRoute from "./routes/Users";
+import { useDispatch, useSelector } from "react-redux";
+import rootReducer from "./redux/reducers";
+import { logoutUser } from "./redux/actions";
+import { useEffect, useState } from "react";
+import { loginUser } from "./redux/actions";
 
 function App() {
+  type RootStore = ReturnType<typeof rootReducer>;
+  const dispatch = useDispatch();
+  const user = useSelector(
+    (state: RootStore) => state.reduceUsers.userVariable
+  ) || {
+    email: "",
+    password: "",
+  };
+  console.log(user);
+
+  const handleLogoutUser = () => {
+    console.log("handleLogoutUser");
+    dispatch(logoutUser({ email: "", password: "" }));
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <Router>
+        <nav
+          style={{
+            borderBottom: "solid 1px",
+            paddingBottom: "1rem",
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          {user.email ? (
+            <Link to="/login" onClick={handleLogoutUser}>
+              logout
+            </Link>
+          ) : (
+            <Link to="/login">login</Link>
+          )}
+        </nav>
+
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute user={user}>
+                <Homepage />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/signup" element={<Signup />} />
+
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </Router>
     </div>
   );
 }

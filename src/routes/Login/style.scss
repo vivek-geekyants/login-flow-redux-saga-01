@@ -1,0 +1,73 @@
+@import "../../utils/colorConstants.scss";
+
+.login {
+  background-color: $BG_COLOR;
+  min-height: 100vh;
+}
+
+.login-container {
+  background-color: $BRIGHT_GREY_COLOR;
+  min-height: 100vh;
+}
+
+.login-form-container {
+  max-width: 300px;
+  margin: auto;
+}
+
+.field-container {
+  margin: 20px;
+}
+
+.logo-container {
+  max-width: 300px;
+  margin-top: 50px;
+}
+
+.heading-text {
+  color: $WHITE_COLOR;
+  margin-bottom: 10px;
+}
+
+.heading-text p {
+  font-size: 20px;
+}
+
+.mui-form-control,
+.heading-text {
+  min-width: 300px !important;
+}
+
+.mui-input-label {
+  color: $WHITE_COLOR !important;
+}
+
+.mui-input {
+  color: $WHITE_COLOR !important;
+  border-bottom: 1px solid $WHITE_COLOR !important;
+}
+
+.mui-input {
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: $WHITE_COLOR !important;
+  }
+}
+
+.field-container {
+  margin-left: 0;
+  margin-right: 0;
+}
+.reset-link {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+}
+.MuiButton-contained.Mui-disabled {
+  color: gray !important;
+  background-color: white !important;
+  opacity: 0.3 !important;
+}
