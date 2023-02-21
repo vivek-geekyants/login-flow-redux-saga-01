@@ -1,6 +1,10 @@
 import types from "../../utils/actionTypes";
 
 export const loginUser = (userInfo: any) => ({
+  type: types.CHECK_LOGIN_USER,
+  payload: { ...userInfo },
+});
+export const login = (userInfo: any) => ({
   type: types.LOGIN_USER,
   payload: { ...userInfo },
 });

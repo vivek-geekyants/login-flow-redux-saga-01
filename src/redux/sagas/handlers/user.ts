@@ -1,6 +1,8 @@
 import { call, put } from "redux-saga/effects";
 import { addUser } from "../../actions";
+import jwt from "jwt-decode";
 import { requestGetUser, requestAddUser } from "../requests/user";
+import types from "../../../utils/actionTypes";
 
 interface UserInfoArray {
   config: object;
@@ -29,14 +31,37 @@ export function* handleLoginUser(action: ActionType) {
   try {
     const response: UserInfoArray = yield call(requestGetUser, action.payload);
     const data: any = { ...response.data };
-    console.log("getUser:", data);
+
     if (data.user) {
       localStorage.setItem("token", data.user);
-      alert("Login successfull");
-      window.location.href = "/";
+      // create and yield a dispatch Effect
+
+      // const user: string = jwt(data.user);
+      if (
+        data.user ===
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiV…DUwfQ.36DISVby6x8ZuuaK9ishRMM3M36QUVgRZAXCA7qeG2o"
+      ) {
+        const user = {
+          name: "Varun",
+          email: "vivekl@geekyants.com",
+        };
+
+        yield put({ type: types.LOGIN_USER, payload: user });
+
+        alert("Login successfull");
+        // window.location.href = "/";
+      }
     }
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    switch (error?.response?.status) {
+      case 401:
+        alert("unauthorized user");
+        break;
+
+      default:
+        alert("please try again");
+        break;
+    }
   }
 }
 

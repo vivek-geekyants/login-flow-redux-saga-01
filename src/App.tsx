@@ -18,7 +18,6 @@ function App() {
     email: "",
     password: "",
   };
-  console.log(user);
 
   const handleLogoutUser = () => {
     console.log("handleLogoutUser");
@@ -26,7 +25,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className='App'>
       <Router>
         <nav
           style={{
@@ -35,26 +34,26 @@ function App() {
           }}
         >
           {user.email ? (
-            <Link to="/login" onClick={handleLogoutUser}>
+            <Link to='/login' onClick={handleLogoutUser}>
               logout
             </Link>
           ) : (
-            <Link to="/login">login</Link>
+            <Link to='/login'>login</Link>
           )}
         </nav>
 
         <Routes>
           <Route
-            path="/"
+            path='/'
             element={
               <ProtectedRoute user={user}>
                 <Homepage />
               </ProtectedRoute>
             }
           />
-          <Route path="/signup" element={<Signup />} />
+          <Route path='/signup' element={<Signup />} />
 
-          <Route path="/login" element={<Login />} />
+          <Route path='/login' element={<Login />} />
         </Routes>
       </Router>
     </div>

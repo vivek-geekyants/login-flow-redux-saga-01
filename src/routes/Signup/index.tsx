@@ -1,7 +1,7 @@
-import { Form, Field } from "react-final-form";
-import { useDispatch } from "react-redux";
-import { addUser } from "../../redux/actions";
-import "./style.scss";
+import { Form, Field } from 'react-final-form';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../../redux/actions';
+import './style.scss';
 import {
   CssBaseline,
   Container,
@@ -12,7 +12,7 @@ import {
   Grid,
   Typography,
   Button,
-} from "@material-ui/core";
+} from '@material-ui/core';
 
 interface UserSignupInfo {
   email: string;
@@ -21,13 +21,14 @@ interface UserSignupInfo {
 }
 
 const Signup = () => {
+  //dispatch action
   const dispatch = useDispatch();
 
   const FormInput = ({ label, placeHolder, input, meta }: any) => (
-    <FormControl className="mui-form-control">
-      <InputLabel className="mui-input-label">{label}</InputLabel>
+    <FormControl className='mui-form-control'>
+      <InputLabel className='mui-input-label'>{label}</InputLabel>
       <Input
-        className="mui-input"
+        className='mui-input'
         {...input}
         type={input.type}
         placeholder={placeHolder}
@@ -39,19 +40,19 @@ const Signup = () => {
   );
 
   const required = (input: any) => {
-    if (!input || input === "") return "This field is required";
+    if (!input || input === '') return 'This field is required';
   };
 
   const email = (value: string) =>
     value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
-      ? "Invalid email address"
+      ? 'Invalid email address'
       : undefined;
 
   const onSubmit = ({ email, name, password }: UserSignupInfo) => {
     dispatch(addUser({ email, name, password }));
   };
   return (
-    <div className="signup">
+    <div className='signup'>
       <Form
         onSubmit={onSubmit}
         render={({ handleSubmit, invalid }) => (
@@ -61,40 +62,40 @@ const Signup = () => {
                 e.preventDefault();
                 handleSubmit();
               }}
-              className="signup-form-container"
+              className='signup-form-container'
             >
-              <div className="field-container">
+              <div className='field-container'>
                 <Field
-                  name="email"
-                  type="email"
-                  label="Email"
-                  placeHolder="Enter email"
+                  name='email'
+                  type='email'
+                  label='Email'
+                  placeHolder='Enter email'
                   component={FormInput}
                   validate={required}
                 />
               </div>
-              <div className="field-container">
+              <div className='field-container'>
                 <Field
-                  name="name"
-                  type="text"
+                  name='name'
+                  type='text'
                   component={FormInput}
-                  label="Name"
-                  placeHolder="Varun"
+                  label='Name'
+                  placeHolder='Varun'
                   validate={required}
                 />
               </div>
-              <div className="field-container">
+              <div className='field-container'>
                 <Field
-                  name="password"
-                  type="password"
+                  name='password'
+                  type='password'
                   component={FormInput}
-                  label="Password"
-                  placeHolder="Enter password"
+                  label='Password'
+                  placeHolder='Enter password'
                   validate={required}
                 />
               </div>
-              <div className="field-container">
-                <button type="submit" disabled={invalid}>
+              <div className='field-container'>
+                <button type='submit' disabled={invalid}>
                   Signup
                 </button>
               </div>

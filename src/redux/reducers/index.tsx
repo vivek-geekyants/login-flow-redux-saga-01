@@ -6,34 +6,34 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import types from "../../utils/actionTypes";
 
-console.log(types.LOGIN_USER);
-
 interface User {
   id: number;
   name: string;
   email: string;
   password: string;
 }
+
 interface UserLoggedIn {
+  name: string;
   email: string;
-  password: string;
-  error: "";
 }
 interface UserLoggedInObject {
   userVariable: UserLoggedIn;
 }
 
 const defaultUserState: UserLoggedInObject = {
-  userVariable: { email: "", password: "", error: "" },
+  userVariable: {
+    name: "",
+    email: "",
+  },
 };
 
 const reduceUsers = (
-  state = defaultUserState || { email: "", password: "", error: "" },
+  state = defaultUserState || { name: "", email: "" },
   action: { type: string; payload: UserLoggedIn }
 ) => {
   switch (action.type) {
     case types.LOGIN_USER:
-      console.log(action);
       return {
         userVariable: { ...action.payload },
       };

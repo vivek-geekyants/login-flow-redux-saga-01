@@ -12,6 +12,7 @@ interface UserLoginPayload {
 
 export function requestGetUser(UserPayloadObject: UserLoginPayload) {
   const body = UserPayloadObject;
+
   const headerObject = {
     "Content-type": "application/json",
   };
