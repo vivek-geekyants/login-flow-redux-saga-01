@@ -35,6 +35,7 @@ app.post("/api/login", async (req, res) => {
     email: req.body.email,
     password: req.body.password,
   });
+  console.log(user);
   if (user) {
     const token = jwt.sign(
       {
@@ -43,9 +44,11 @@ app.post("/api/login", async (req, res) => {
       },
       "secret123"
     );
-    return res.json({ status: "ok", user: token });
+    return res.status(200).send({ user: token });
   } else {
-    return res.json({ status: "error", user: false });
+    return res.status(401).send({
+      user: false,
+    });
   }
 });
 
@@ -56,7 +59,7 @@ app.get("/api/login", async (req, res) => {
     const email = decoded.email;
   } catch (error) {
     console.log(error);
-    res.json({ status: "error", error: "invalid token" });
+    res.json({ status: 401, error: "invalid token" });
   }
 
   const user = await User.findOne({
